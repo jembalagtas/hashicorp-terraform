@@ -26,7 +26,7 @@ resource "aws_security_group" "terraform-sg" {
 
 
 resource "aws_instance" "terraform-instance" {
-  ami           = "ami-0c322300a1dd5dc79"
+  ami           = "ami-035b3c7efe6d061d5"
   instance_type = "t2.micro"
   security_groups = ["terraform-sg"]
   key_name = "phone-service-key-2.0"
