@@ -29,11 +29,11 @@ resource "aws_instance" "terraform-instance" {
   ami           = "ami-0c322300a1dd5dc79"
   instance_type = "t2.micro"
   security_groups = ["terraform-sg"]
-  key_name = "phone-service-key-2.0"
+  key_name = "ansible-key"
   root_block_device {
     delete_on_termination = true
     volume_type = "gp2"
-    volume_size = "8"
+    volume_size = "10"
   }
 
   tags = {
@@ -42,7 +42,7 @@ resource "aws_instance" "terraform-instance" {
   volume_tags = {
     Name = "terraform_volume"
   }
-
+/***
   provisioner "file" {
     source      = "platform.sh"
     destination = "/tmp/platform.sh"
@@ -54,6 +54,7 @@ resource "aws_instance" "terraform-instance" {
       "sudo /tmp/platform.sh"
     ]
   }
+
   connection {
     type     = "ssh"
     host     = self.public_ip
@@ -61,5 +62,6 @@ resource "aws_instance" "terraform-instance" {
     password = ""
     private_key = "${file("/root/terraform/key.pem")}"
   }
+***/
 }
 
