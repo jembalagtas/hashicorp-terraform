@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "ap-southeast-1"
 }
 
 resource "aws_security_group" "terraform-sg" {
@@ -26,14 +26,14 @@ resource "aws_security_group" "terraform-sg" {
 
 
 resource "aws_instance" "terraform-instance" {
-  ami           = "ami-0c322300a1dd5dc79"
+  ami           = "ami-02b6d9703a69265e9"
   instance_type = "t2.micro"
   security_groups = ["terraform-sg"]
   key_name = "ansible-key"
   root_block_device {
     delete_on_termination = true
     volume_type = "gp2"
-    volume_size = "10"
+    volume_size = "15"
   }
 
   tags = {
@@ -42,7 +42,7 @@ resource "aws_instance" "terraform-instance" {
   volume_tags = {
     Name = "terraform_volume"
   }
-/***
+
   provisioner "file" {
     source      = "platform.sh"
     destination = "/tmp/platform.sh"
@@ -62,6 +62,6 @@ resource "aws_instance" "terraform-instance" {
     password = ""
     private_key = "${file("/root/terraform/key.pem")}"
   }
-***/
+
 }
 
